@@ -15,11 +15,13 @@ class TextStyles {
     fontWeight: FontWeightHelper.extraBold,
      color: Colors.black,
   );
-  static TextStyle font9BlackExtraBold = TextStyle(
-    fontSize: 36.sp,
-    fontWeight: FontWeightHelper.extraBold,
+
+  static TextStyle font10BlackRegular = TextStyle(
+    fontSize: 10.sp,
+    fontWeight: FontWeightHelper.regular,
     color: Colors.black,
   );
+
 
 
   static TextStyle font13GrayRegular = TextStyle(
