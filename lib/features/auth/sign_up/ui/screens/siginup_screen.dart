@@ -108,8 +108,12 @@ class SignupScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  const CustomButtonAuth(
+                  CustomButtonAuth(
                     textButton: 'Next',
+                    onPressed: () {
+
+                    },
+                    icon: Icons.arrow_forward_ios,
                   ),
                   CustomAuthRow(
                     text: 'Already a member?',
