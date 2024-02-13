@@ -88,12 +88,26 @@ class SignupScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Checkbox(
+
+                       shape: RoundedRectangleBorder(
+                         borderRadius: BorderRadius.circular(5),
+
+                       ),
                           value: false
                           , onChanged: (value) {
 
                           },
+
+                      ),
+                      Expanded(
+                        child: Text(
+                          'By checking the box you agree to our Terms and Conditions.',
+                          style: TextStyles.font10BlackRegular,
+                        ),
                       )
 
                     ],
