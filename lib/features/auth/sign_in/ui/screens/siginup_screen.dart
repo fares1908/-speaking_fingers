@@ -44,7 +44,7 @@ class SignupScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Get Started', style: TextStyles.font32BlackExtraBold),
+                  Text('Get Started', style: TextStyles.font36BlackExtraBold),
                   Text(
                     'by creating a free account.',
                     style: TextStyles.font14BlackLight,
@@ -84,6 +84,20 @@ class SignupScreen extends StatelessWidget {
                     text: 'Password',
                     suffixIcon: Icons.lock_outline,
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                          value: false
+                          , onChanged: (value) {
+
+                          },
+                      )
+
+                    ],
+                  )
 
                 ],
               ),
