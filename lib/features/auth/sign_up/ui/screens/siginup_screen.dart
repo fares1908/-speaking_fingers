@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/text_styles.dart';
+import '../../../widgets/custom_matrialbutton.dart';
+import '../../../widgets/custom_row_auth.dart';
 import '../../../widgets/custom_textfield.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -92,16 +94,11 @@ class SignupScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Checkbox(
-
-                       shape: RoundedRectangleBorder(
-                         borderRadius: BorderRadius.circular(5),
-
-                       ),
-                          value: false
-                          , onChanged: (value) {
-
-                          },
-
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        value: false,
+                        onChanged: (value) {},
                       ),
                       Expanded(
                         child: Text(
@@ -109,10 +106,16 @@ class SignupScreen extends StatelessWidget {
                           style: TextStyles.font10BlackRegular,
                         ),
                       )
-
                     ],
+                  ),
+                  const CustomButtonAuth(
+                    textButton: 'Next',
+                  ),
+                  CustomAuthRow(
+                    text: 'Already a member?',
+                    textButton: 'Log In',
+                    onPressed: () {},
                   )
-
                 ],
               ),
             ),

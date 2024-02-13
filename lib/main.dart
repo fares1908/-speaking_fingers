@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'features/auth/sign_in/ui/screens/siginup_screen.dart';
+
+import 'features/auth/sign_up/ui/screens/siginup_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
