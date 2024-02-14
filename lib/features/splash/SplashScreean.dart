@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:speaking_fingers/core/theming/colors.dart';
 import 'package:speaking_fingers/core/theming/text_styles.dart';
-import 'package:speaking_fingers/features/on_boarding//ui/onBoarding1.dart';
+import 'package:speaking_fingers/features/on_boarding/ui/screens/on_boarding1.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,10 +17,10 @@ class SplashScreen extends StatefulWidget {
 class _splashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    Timer(
-        const Duration(seconds: 4),
-        () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => onBoardingScreen())));
+    // Timer(
+    //     const Duration(seconds: 4),
+    //     () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+    //         builder: (BuildContext context) => onBoardingScreen1())));
 
     return Container(
       decoration: const BoxDecoration(
