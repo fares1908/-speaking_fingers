@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'features/auth/forget_password/ui/screen/forget_password.dart';
 import 'features/auth/sign_up/ui/screens/siginup_screen.dart';
 
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   ScreenUtilInit(
-      designSize: Size(375, 812),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       child: MaterialApp(
         title: 'Flutter Dem',
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Mulish'
         ),
         debugShowCheckedModeBanner: false,
-        home: SignupScreen(),
+        home: const ForgetPassword(),
       ),
     );
   }
