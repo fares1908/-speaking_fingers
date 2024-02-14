@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:speaking_fingers/ui/HomeSCreen.dart';
-import 'package:speaking_fingers/ui/SplashScreean.dart';
+import 'package:speaking_fingers/features/on_boarding//ui/onBoarding1.dart';
+import 'package:speaking_fingers/features/splash/SplashScreean.dart';
 
 import 'features/auth/forget_password/ui/screen/forget_password.dart';
 import 'features/auth/sign_up/ui/screens/siginup_screen.dart';
@@ -29,7 +29,8 @@ class MyApp extends StatelessWidget {
           initialRoute: SplashScreen.routeName,
           routes: {
             SplashScreen.routeName :(context)=>SplashScreen(),
-            HomeScreen.routeName:(context)=>HomeScreen()
+            onBoardingScreen.routeName:(context)=>onBoardingScreen(),
+            SignupScreen.routeName:(context)=>SignupScreen()
           },
         home: const ForgetPassword(),
       ),

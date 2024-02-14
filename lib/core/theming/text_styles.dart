@@ -32,6 +32,16 @@ class TextStyles {
     fontWeight: FontWeightHelper.medium,
     color: Colors.black,
   );
+  static TextStyle font13BlackRegular = TextStyle(
+    fontSize: 13.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: Colors.black,
+  );
+  static TextStyle font28BlackRegular = TextStyle(
+    fontSize: 28.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: Colors.black,
+  );
 
   static TextStyle font20WhiteSemiBold = TextStyle(
     fontSize: 20.sp,

@@ -9,7 +9,7 @@ import '../../../widgets/custom_textfield.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
-
+  static const String routeName='sing';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:speaking_fingers/core/theming/colors.dart';
 import 'package:speaking_fingers/core/theming/text_styles.dart';
-import 'package:speaking_fingers/ui/HomeSCreen.dart';
+import 'package:speaking_fingers/features/on_boarding//ui/onBoarding1.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +20,7 @@ class _splashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 4),
             () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => HomeScreen())));
+            builder: (BuildContext context) => onBoardingScreen())));
     return Container(
       decoration: BoxDecoration(gradient: LinearGradient(colors: [
         AppColors.stackShape,
