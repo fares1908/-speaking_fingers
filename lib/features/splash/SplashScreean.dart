@@ -19,23 +19,21 @@ class _splashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     Timer(
         const Duration(seconds: 4),
-            () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-<<<<<<< Updated upstream:lib/features/splash/SplashScreean.dart
+        () => Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (BuildContext context) => onBoardingScreen())));
-=======
-            builder: (BuildContext context) => const HomeScreen())));
->>>>>>> Stashed changes:lib/ui/SplashScreean.dart
+
     return Container(
-      decoration: const BoxDecoration(gradient: LinearGradient(colors: [
-        AppColors.stackShape,
-        AppColors.minColor,
-      ],
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+        colors: [
+          AppColors.stackShape,
+          AppColors.minColor,
+        ],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-
       )),
-
-      child: Column(mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Image.asset('assets/images/pattern.png'),
           Image.asset(
@@ -52,8 +50,12 @@ class _splashScreenState extends State<SplashScreen> {
             // fit: BoxFit.fill,
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-          Material( color: Colors.transparent,
-              child: Text('Speaking Fingers',style: TextStyles.font20WhiteBold,))
+          Material(
+              color: Colors.transparent,
+              child: Text(
+                'Speaking Fingers',
+                style: TextStyles.font20WhiteBold,
+              ))
         ],
       ),
     );
