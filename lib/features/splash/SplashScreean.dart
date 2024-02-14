@@ -18,11 +18,15 @@ class _splashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     Timer(
-        Duration(seconds: 4),
+        const Duration(seconds: 4),
             () => Navigator.of(context).pushReplacement(MaterialPageRoute(
+<<<<<<< Updated upstream:lib/features/splash/SplashScreean.dart
             builder: (BuildContext context) => onBoardingScreen())));
+=======
+            builder: (BuildContext context) => const HomeScreen())));
+>>>>>>> Stashed changes:lib/ui/SplashScreean.dart
     return Container(
-      decoration: BoxDecoration(gradient: LinearGradient(colors: [
+      decoration: const BoxDecoration(gradient: LinearGradient(colors: [
         AppColors.stackShape,
         AppColors.minColor,
       ],
