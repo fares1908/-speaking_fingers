@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:speaking_fingers/core/routes/AppRoute/routersName.dart';
 
 import 'on_boarding1.dart';
 import 'on_boarding2.dart';
@@ -15,6 +17,7 @@ class OnBoarding extends StatefulWidget {
 class _OnBoardingState extends State<OnBoarding> {
   final PageController _controller = PageController();
   int _currentPage = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +25,16 @@ class _OnBoardingState extends State<OnBoarding> {
         padding: EdgeInsets.only(bottom: 8.h, right: 5.w),
         child: FloatingActionButton(
           backgroundColor: Colors.black,
-          onPressed: () {},
+          onPressed: () {
+            if (_currentPage < onboardingScreens.length - 1) {
+              // If there are more screens, navigate to the next one
+              _controller.animateToPage(_currentPage + 1,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeInOut);
+            } else {
+              Get.toNamed(AppRouter.login);
+            }
+          },
           shape: const CircleBorder(),
           child: const Icon(Icons.arrow_forward_ios, color: Colors.white),
         ),
@@ -36,12 +48,12 @@ class _OnBoardingState extends State<OnBoarding> {
                 _currentPage = index;
               });
             },
-            itemCount: onboardingScreens.length, // Number of onboarding screens
+            itemCount: onboardingScreens.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 90),
                 child: onboardingScreens[index],
-              ); // Use the widget at index
+              );
             },
           ),
           Positioned(
@@ -55,27 +67,17 @@ class _OnBoardingState extends State<OnBoarding> {
                 dotHeight: 8,
                 expansionFactor: 1.4,
                 activeDotColor: Colors.blue,
-
                 spacing: 4,
-                // activeDotColor: AppColor.white,
               ),
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.only(bottom: 16),
-          //   child: Align(
-          //     alignment: Alignment.bottomCenter,
-          //     child:
-          //   ),
-          // ),
         ],
       ),
     );
   }
 }
 
-// Define your OnBoardingScreen widgets here
 final List<Widget> onboardingScreens = [
   const OnBoardingScreen1(),
-  OnBoardingScreen2()
+  OnBoardingScreen2(),
 ];

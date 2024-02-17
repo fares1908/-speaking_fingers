@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:speaking_fingers/core/theming/colors.dart';
-import 'package:speaking_fingers/core/theming/spacing.dart';
 import 'package:speaking_fingers/core/theming/text_styles.dart';
-import 'package:speaking_fingers/features/auth/sign_up/ui/screens/siginup_screen.dart';
 
 class OnBoardingScreen1 extends StatelessWidget {
   const OnBoardingScreen1({super.key});
@@ -12,8 +9,6 @@ class OnBoardingScreen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -27,7 +22,7 @@ class OnBoardingScreen1 extends StatelessWidget {
                 ),
                 Positioned(
                   top: 0,
-                  left: 180,
+                  left: 180.w,
                   child: SizedBox(
                       width: 211.w,
                       height: 172.h,
@@ -37,8 +32,8 @@ class OnBoardingScreen1 extends StatelessWidget {
                       )),
                 ),
                 Positioned(
-                  top: 73,
-                  left: 12,
+                  top: 70.h,
+                  left: 19.w,
                   child: SizedBox(
                     width: 60.w,
                     height: 60.h,
@@ -49,30 +44,42 @@ class OnBoardingScreen1 extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 121,
-                  left: 12,
+                  top: 135.h,
+                  left: 19.w,
                   child: SizedBox(
                     width: 231.w,
                     height: 35.h,
-                    child: const Text(
-                      'Speaking Fingers',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        decoration: TextDecoration.underline,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            
+                            color: Colors
+                                .black, // Choose the color of the underline
+                            width: 1.0, // Adjust the thickness as needed
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        'Speaking Fingers',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 Positioned(
-                  top: 160,
-                  left: 12,
+                  top: 180.h,
+                  left: 19.w,
                   child: SizedBox(
                     width: 200.w,
                     height: 85.h,
                     child: Text(
                         'Professional application to \n convert sign language to\n text & record',
-                        style: TextStyles.font13BlackRegular),
+                        style: TextStyles.font13BlackRegular
+                            .copyWith(fontSize: 16)),
                   ),
                 ),
               ],

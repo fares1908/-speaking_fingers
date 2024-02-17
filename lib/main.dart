@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:speaking_fingers/features/on_boarding/ui/screens/on_boarding1.dart';
-import 'package:speaking_fingers/features/splash/SplashScreean.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'core/class/initial_binding.dart';
+import 'core/class/my_services.dart';
+import 'core/routes/AppRoute/routes.dart';
 
-import 'features/auth/forget_password/ui/screen/forget_password.dart';
-import 'features/auth/sign_up/ui/screens/siginup_screen.dart';
-import 'features/on_boarding/ui/screens/on_boarding.dart';
-
-
-void main() {
-  runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await initialServices();
+    runApp(const MyApp());
+  } catch (e) {
+    // Handle initialization error
+    print('Initialization error: $e');
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -18,22 +22,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return   ScreenUtilInit(
+    return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
-      child: MaterialApp(
-        title: 'Flutter Dem',
+      builder: (BuildContext c, child) => GetMaterialApp(
+        title: 'Flutter Demo',
+        initialBinding: initialBinding(),
+        getPages: routes,
         theme: ThemeData(
-            fontFamily: 'Mulish'
+          useMaterial3: false, scaffoldBackgroundColor: Colors.white,
+          fontFamily:'Mulish',
         ),
         debugShowCheckedModeBanner: false,
-          initialRoute: SplashScreen.routeName,
-          // routes: {
-          //   SplashScreen.routeName :(context)=>SplashScreen(),
-          //   onBoardingScreen.routeName:(context)=>onBoardingScreen(),
-          //   SignupScreen.routeName:(context)=>SignupScreen()
-          // },
-        home: const OnBoarding(),
       ),
     );
   }
