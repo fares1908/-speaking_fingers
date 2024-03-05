@@ -53,7 +53,7 @@ class OnBoardingScreen1 extends StatelessWidget {
                       decoration: const BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
-                            
+
                             color: Colors
                                 .black, // Choose the color of the underline
                             width: 1.0, // Adjust the thickness as needed

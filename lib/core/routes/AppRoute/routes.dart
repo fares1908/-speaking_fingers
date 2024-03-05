@@ -8,10 +8,11 @@ import 'package:speaking_fingers/features/on_boarding/ui/screens/on_boarding.dar
 import 'package:speaking_fingers/features/on_boarding/ui/screens/on_boarding1.dart';
 
 import '../../../features/auth/login/ui/login_screen.dart';
+import '../../../features/home/ui/home-body.dart';
 import '../../../features/on_boarding/ui/screens/on_boarding2.dart';
 import '../../class/my_middel_ware.dart';
 List<GetPage<dynamic>> ?routes=[
-  GetPage(name: '/', page:() => const OnBoarding(),
+  GetPage(name: '/', page:() => const HomeScreenBody(),
   //     middlewares:[
   //   MyMiddleWare()
   // ]
