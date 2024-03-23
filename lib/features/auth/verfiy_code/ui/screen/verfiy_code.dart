@@ -103,7 +103,9 @@ class VerifyCodeSignUp extends StatelessWidget {
                     CustomAuthResendCode(
                       text: 'Didn’t receive any code?',
                       textButton: 'Resend Code',
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.resendCode();
+                      },
                     )
                   ],
                 ),

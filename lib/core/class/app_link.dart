@@ -1,7 +1,8 @@
 class AppLink {
   static const String server = 'https://youssifallam.pythonanywhere.com';
   static const String login =
-      '$server/api/users/login';
+      'https://youssifallam.pythonanywhere.com/api/user/login/';
+
   static const String signUp =
       '$server/api/users/';
   static const String signUpVerify =

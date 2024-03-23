@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:speaking_fingers/features/auth/sign_up/logic/sign_up_data.dart';
+import 'package:speaking_fingers/features/auth/sign_up/data/sign_up_data.dart';
 
 import '../../../../core/class/status_request.dart';
 import '../../../../core/helpers/functions/handling_data.dart';

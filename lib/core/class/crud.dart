@@ -7,7 +7,11 @@ import 'status_request.dart';
 class Crud {
   Future<Either<StatusRequest, Map>> postData(String linkUrl, Map data) async {
     if (await checkInternet()) {
-      http.Response response = await http.post(Uri.parse(linkUrl), body: data);
+      http.Response response = await http.post(Uri.parse(linkUrl), body: data ,
+
+      headers: {
+        'Cookie': 'csrftoken=wx4U7zdYJwTde0Lo4KguKPpNTUWyje39; sessionid=c673tcvmy7a4pl15dt75k0amnprgwnes'
+      });
       if (kDebugMode) {
         print(response.statusCode);
       }

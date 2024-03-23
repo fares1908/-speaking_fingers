@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:speaking_fingers/features/auth/verfiy_code/logic/verify_code_data.dart';
+import 'package:speaking_fingers/features/auth/verfiy_code/data/verify_code_data.dart';
 
 import '../../../../core/class/status_request.dart';
 import '../../../../core/helpers/functions/handling_data.dart';
