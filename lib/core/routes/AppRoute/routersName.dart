@@ -5,4 +5,6 @@ class AppRouter {
   static const String forgetPassword = '/forgetPassword';
   static const String onBoarding1 = '/onBoarding1';
   static const String onBoarding2 = '/onBoarding2';
+  static const String  home = '/home';
+  static const String verifyCodeSignUp = '/verifyCodeSignUp';
 }

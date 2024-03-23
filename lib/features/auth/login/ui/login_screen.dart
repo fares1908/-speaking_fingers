@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:speaking_fingers/core/routes/AppRoute/routersName.dart';
 
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/text_styles.dart';
@@ -25,7 +27,7 @@ class LoginScreen extends StatelessWidget {
                 Image.asset(
                   'assets/images/Shape 1.png',
                   fit: BoxFit.fill,
-                  height: 410.h,
+                  height: 360.h,
                   width: double.infinity,
                 ),
                 Positioned(
@@ -66,14 +68,11 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(
-              height: 20,
-            ),
             Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
+              const EdgeInsets.only(left: 20.0, right:20,top: 80),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextField(
                       isNumber: false,
@@ -81,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                       text: 'Email address',
                       suffixIcon: Icons.email_outlined),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
 
                   CustomTextField(
@@ -91,21 +90,26 @@ class LoginScreen extends StatelessWidget {
                     suffixIcon: Icons.lock_outline,
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 80,
                   ),
-
-                  CustomButtonAuth(
-                    textButton: 'Next',
-                    onPressed: () {
-
-                    },
-                    icon: Icons.arrow_forward_ios,
+                  Column(
+                    children: [
+                      CustomButtonAuth(
+                        textButton: 'Next',
+                        onPressed: () {
+                          // Implement your login logic here
+                        },
+                        icon: Icons.arrow_forward_ios,
+                      ),
+                      CustomAuthRow(
+                        text: 'New member?',
+                        textButton: 'Register now',
+                        onPressed: () {
+                          Get.offNamed(AppRouter.register);
+                        },
+                      ),
+                    ],
                   ),
-                  CustomAuthRow(
-                    text: 'New member?',
-                    textButton: 'Register now',
-                    onPressed: () {},
-                  )
                 ],
               ),
             ),

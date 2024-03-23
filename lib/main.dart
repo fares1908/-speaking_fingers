@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       builder: (BuildContext c, child) => GetMaterialApp(
-        title: 'Flutter Demo',
+        title: 'Speakers fingers',
         initialBinding: initialBinding(),
         getPages: routes,
         theme: ThemeData(

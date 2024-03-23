@@ -1,131 +1,137 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:speaking_fingers/core/class/handling_data_view.dart';
+import 'package:speaking_fingers/core/routes/AppRoute/routersName.dart';
 
+import '../../../../../core/helpers/functions/valid_Input.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/text_styles.dart';
 import '../../../widgets/custom_matrialbutton.dart';
 import '../../../widgets/custom_row_auth.dart';
 import '../../../widgets/custom_textfield.dart';
+import '../../logic/sign_up_controller.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
-  static const String routeName='sing';
   @override
   Widget build(BuildContext context) {
+    Get.put(SignUpControllerImpl());
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                ClipPath(
-                  clipper: CustomClipperPath(),
-                  child: Container(
-                    color: AppColors.themeColor,
-                    height: 150.h,
-                    width: double.infinity,
-                  ),
-                ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  child: SizedBox(
-                      width: 120.w,
-                      child: Image.asset(
-                        'assets/images/Sub shape 2.png',
-                        fit: BoxFit.fill,
-                      )),
-                ),
-              ],
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Get Started', style: TextStyles.font36BlackExtraBold),
-                  Text(
-                    'by creating a free account.',
-                    style: TextStyles.font14BlackLight,
-                  ),
-                  SizedBox(
-                    height: 100.h,
-                  ),
-                  CustomTextField(
-                    isNumber: false,
-                    valid: (p0) {},
-                    text: 'Full name',
-                    suffixIcon: Icons.person_2_outlined,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField(
-                      isNumber: false,
-                      valid: (p0) {},
-                      text: 'Email address',
-                      suffixIcon: Icons.email_outlined),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField(
-                    isNumber: true,
-                    valid: (p0) {},
-                    text: 'phone',
-                    suffixIcon: Icons.phone_android_outlined,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField(
-                    isNumber: false,
-                    valid: (p0) {},
-                    text: 'Password',
-                    suffixIcon: Icons.lock_outline,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+      body: GetBuilder<SignUpControllerImpl>(
+          builder: (controller) => HandlingDataView(
+                statusRequest: controller.statusRequest,
+                widget: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Checkbox(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        value: false,
-                        onChanged: (value) {},
+                      Stack(
+                        children: [
+                          ClipPath(
+                            clipper: CustomClipperPath(),
+                            child: Container(
+                              color: AppColors.themeColor,
+                              height: 150.h,
+                              width: double.infinity,
+                            ),
+                          ),
+                          Positioned(
+                            top: 0,
+                            left: 0,
+                            child: SizedBox(
+                                width: 120.w,
+                                child: Image.asset(
+                                  'assets/images/Sub shape 2.png',
+                                  fit: BoxFit.fill,
+                                )),
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        child: Text(
-                          'By checking the box you agree to our Terms and Conditions.',
-                          style: TextStyles.font10BlackRegular,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 15),
+                        child: Form(
+                          key: controller.formState,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Get Started',
+                                  style: TextStyles.font36BlackExtraBold),
+                              Text(
+                                'by creating a free account.',
+                                style: TextStyles.font14BlackLight,
+                              ),
+                              SizedBox(
+                                height: 100.h,
+                              ),
+                              CustomTextField(
+                                controller: controller.name,
+                                isNumber: false,
+                                valid: (val) {
+                                  return validInput(val!, 2, 20, 'name');
+                                },
+                                text: 'Full name',
+                                suffixIcon: Icons.person_2_outlined,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              CustomTextField(
+                                  controller: controller.email,
+                                  isNumber: false,
+                                  valid: (val) {
+                                    return validInput(val!, 2, 60, 'email');
+                                  },
+                                  text: 'Email address',
+                                  suffixIcon: Icons.email_outlined),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              // CustomTextField(
+                              //   isNumber: true,
+                              //   valid: (p0) {},
+                              //   text: 'phone',
+                              //   suffixIcon: Icons.phone_android_outlined,
+                              // ),
+                              // const SizedBox(
+                              //   height: 10,
+                              // ),
+                              CustomTextField(
+                                controller: controller.password,
+                                isNumber: false,
+                                valid: (val) {
+                                  return validInput(val!, 2, 20, 'Password');
+                                },
+                                text: 'Password',
+                                suffixIcon: Icons.lock_outline,
+                              ),
+                              const SizedBox(
+                                height: 80,
+                              ),
+
+                              CustomButtonAuth(
+                                textButton: 'Next',
+                                onPressed: () {
+                                  controller.goToRegister();
+                                },
+                                icon: Icons.arrow_forward_ios,
+                              ),
+                              CustomAuthRow(
+                                text: 'Already a member?',
+                                textButton: 'Log In',
+                                onPressed: () {
+                                  Get.offNamed(AppRouter.login);
+                                },
+                              )
+                            ],
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
-                  CustomButtonAuth(
-                    textButton: 'Next',
-                    onPressed: () {
-
-                    },
-                    icon: Icons.arrow_forward_ios,
-                  ),
-                  CustomAuthRow(
-                    text: 'Already a member?',
-                    textButton: 'Log In',
-                    onPressed: () {},
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+                ),
+              )),
     );
   }
 }

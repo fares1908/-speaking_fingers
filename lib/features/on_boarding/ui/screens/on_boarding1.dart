@@ -16,7 +16,7 @@ class OnBoardingScreen1 extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/images/Shape 1.png',
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fill,
                   height: 310.h,
                   width: 375.w,
                 ),
