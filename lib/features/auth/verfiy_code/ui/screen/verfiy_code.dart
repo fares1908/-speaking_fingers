@@ -55,11 +55,11 @@ class VerifyCodeSignUp extends StatelessWidget {
                     RichText(
                       text: TextSpan(
                         text:
-                        'Please enter the 6-digit code sent to your  email ',
+                        'Please enter the 4-digit code sent to your  email ',
                         style: TextStyles.font14BlackLight.copyWith(height: 1.2),
                         children: <TextSpan>[
                           TextSpan(
-                            text: 'contact.uiuxexperts@gmail.com',
+                            text: controller.email,
                             style: TextStyles.font14SemiBold
                                 .copyWith(color: AppColors.minColor),
                           ),
@@ -92,11 +92,6 @@ class VerifyCodeSignUp extends StatelessWidget {
                         controller.goToSuccessSignUp(verificationCode);
 
                       }, // end onSubmit
-                    ),
-                    verticalSpace(25),
-                    CustomButtonAuth(
-                      textButton: 'Verify',
-                      onPressed: () {},
                     ),
                     verticalSpace(25),
 

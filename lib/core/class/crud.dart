@@ -19,7 +19,7 @@ class Crud {
         if (kDebugMode) {
           print('Response Body: ${response.body}');
         }
-        Map responseBody = json.decode(response.body);
+        Map responseBody = json.decode(utf8.decode(response.bodyBytes));
         if (kDebugMode) {
           print(responseBody);
         }

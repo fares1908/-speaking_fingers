@@ -1,6 +1,6 @@
 // LoginControllerImpl.dart
 import 'dart:convert';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +11,7 @@ import '../../../../core/routes/AppRoute/routersName.dart';
 import '../data/login_data.dart';
 
 abstract class LoginController extends GetxController {
-  login();
+
 
 }
 
@@ -20,70 +20,62 @@ class LoginControllerImpl extends LoginController {
   StatusRequest statusRequest = StatusRequest.none;
   LoginData loginData = LoginData(Get.find());
   late TextEditingController password;
-
   MyServices services = Get.find();
-  IconData showPasswordIcon = Icons.visibility_off_outlined;
   GlobalKey<FormState> formState = GlobalKey<FormState>();
+  loginUser() async {
+    const String apiUrl = 'https://youssifallam.pythonanywhere.com/api/user/login/';
 
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'email': email.text,
+          'password': password.text,
+        }),
+      );
 
+      final responseData = jsonDecode(utf8.decode(response.bodyBytes));
 
+      if (response.statusCode == 200) {
+        final String userEmail = responseData['user']['email'];
+        final String accessToken = responseData['tokens']['access'];
 
+        await services.sharedPreferences.setString('email', userEmail);
+        await services.sharedPreferences.setString('token', accessToken);
+        await services.sharedPreferences.setString('step', "2");
 
-  @override
-  login() async {
-    var formdata = formState.currentState;
-    if (formdata!.validate()) {
-      statusRequest = StatusRequest.loading;
-      update();
-      try {
-        var response = await loginData.loginData(email.text, password.text);
-        print("=============================== Controller $response ");
-        if (response != null) {
-          // Assuming 'response' is already a Map<String, dynamic> and does not need decoding
-          Map<String, dynamic> jsonResponse = response;
+        Get.offNamed(AppRouter.home);
+        print('Login successful');
+      } else {
+        statusRequest = StatusRequest.serverFailure;
 
-          // Proceed as before
-          if (jsonResponse.containsKey('user') && jsonResponse['user'] != null) {
-            var user = jsonResponse['user'];
-            var tokens = jsonResponse['tokens'];
-
-            if (user is Map<String, dynamic> && user.containsKey('email') &&
-                tokens is Map<String, dynamic> && tokens.containsKey('access') && tokens.containsKey('refresh')) {
-              services.sharedPreferences.setString('email', user['email']);
-              services.sharedPreferences.setString('token', tokens['access']);
-              services.sharedPreferences.setString('step', "2");
-              print("=============================== $statusRequest");
-              Get.offNamed(AppRouter.home);
-            } else {
-              Get.defaultDialog(title: "Warning", middleText: "Invalid response format");
-              statusRequest = StatusRequest.failure;
-            }
-          } else {
-            Get.defaultDialog(title: "Warning", middleText: "User data is missing in the response");
-            statusRequest = StatusRequest.failure;
-          }
+        if (responseData['message'] == "يرجي تفعيل البريد الالكتروني") {
+          // If the message indicates email activation, navigate to the OTP screen
+          // Ensure that the 'id' is correctly extracted from the response
+          String userId = responseData['user'] != null ? responseData['user']['id'].toString() : 'Unknown ID';
+          Get.offNamed(AppRouter.verifyCodeSignUp, arguments: {"email": email.text, "id": userId});
         } else {
-          Get.defaultDialog(title: "Warning", middleText: "No response received from server");
-          statusRequest = StatusRequest.failure;
+          // For other errors, show the error dialog
+          showErrorDialog(responseData['message'] ?? 'An unknown error occurred');
         }
-      } catch (e) {
-        showErrorDialog(e.toString());
-        print(e);
-        statusRequest = StatusRequest.failure;
-      } finally {
-        update();
+
+        print('Failed to login. Status Code: ${response.statusCode}');
       }
+    } catch (e) {
+      statusRequest = StatusRequest.failure;
+      print('Error occurred while trying to login: $e');
+      showErrorDialog('Failed to process your request. Please try again later.');
     }
   }
 
 
 
-
   void showErrorDialog(String message) {
-    Get.defaultDialog(
-      title: "Warning",
-      middleText: message,
-    );
+    // Assuming you have a context available or using Get for dialog
+    Get.defaultDialog(title: "Login Error", middleText: message);
   }
   @override
   void onInit() {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:speaking_fingers/core/class/app_link.dart';
 import 'package:speaking_fingers/features/auth/sign_up/data/sign_up_data.dart';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import '../../../../core/class/status_request.dart';
 import '../../../../core/helpers/functions/handling_data.dart';
 import '../../../../core/routes/AppRoute/routersName.dart';
@@ -10,7 +12,7 @@ import '../../../../core/routes/AppRoute/routersName.dart';
 
 abstract class SignUpController extends GetxController {
   goToLogin();
-  goToRegister();
+
 }
 
 class SignUpControllerImpl extends SignUpController {
@@ -35,38 +37,73 @@ class SignUpControllerImpl extends SignUpController {
     update();
   }
 
-  @override
+  // @override
+  // goToRegister() async {
+  //   if (formState.currentState!.validate()) {
+  //     try {
+  //       statusRequest = StatusRequest.loading;
+  //       update();
+  //
+  //       var response = await signUpData.registerData(email.text, password.text, name.text);
+  //       print("=============================== Controller $response");
+  //
+  //       if (response['user'] != null) {
+  //         String userId = response['user']['id'].toString();
+  //         print(userId); // This should now correctly print the user's id
+  //         Get.offNamed(AppRouter.verifyCodeSignUp, arguments: {"email": email.text, "id": userId});
+  //         print(userId); // Confirms the userId is passed correctly
+  //       } else {
+  //         String errorMessage = response['message'] ?? 'Check email and password email may be token and password may be had least 1 number and 1 uppercase letter';
+  //         showErrorDialog(errorMessage);
+  //         statusRequest = StatusRequest.failure;
+  //       }
+  //
+  //     } catch (e) {
+  //       showErrorDialog('Check email and password email may be token and password may be had least 1 number and 1 uppercase letter and at least  least 8 characters');
+  //       print(e);
+  //     } finally {
+  //       statusRequest = StatusRequest.none;
+  //       update();
+  //     }
+  //   }
+  // }
+
   goToRegister() async {
-    if (formState.currentState!.validate()) {
-      try {
-        statusRequest = StatusRequest.loading;
-        update();
+    const String apiUrl = AppLink.signUp;
 
-        var response = await signUpData.registerData(email.text, password.text, name.text);
-        print("=============================== Controller $response");
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'email': email.text,
+          'password': password.text,
+          'name':name.text
+        }),
+      );
 
-        if (response['user'] != null) {
-          String userId = response['user']['id'].toString();
-          print(userId); // This should now correctly print the user's id
-          Get.offNamed(AppRouter.verifyCodeSignUp, arguments: {"email": email.text, "id": userId});
-          print(userId); // Confirms the userId is passed correctly
-        } else {
-          String errorMessage = response['message'] ?? 'Check email and password email may be token and password may be had least 1 number and 1 uppercase letter';
-          showErrorDialog(errorMessage);
-          statusRequest = StatusRequest.failure;
-        }
+      if (response.statusCode == 200||response.statusCode ==201) {
+        final Map<String, dynamic> responseData = jsonDecode(response.body);
+        String userId =responseData ['user']['id'].toString();
+        print(userId); // This should now correctly print the user's id
+        Get.offNamed(AppRouter.verifyCodeSignUp, arguments: {"email": email.text, "id": userId});
 
-      } catch (e) {
-        showErrorDialog('Check email and password email may be token and password may be had least 1 number and 1 uppercase letter and at least  least 8 characters');
-        print(e);
-      } finally {
-        statusRequest = StatusRequest.none;
-        update();
+        print('Register successful');
+        print('Response Body: ${response.body}');
+      } else {
+        statusRequest=StatusRequest.serverFailure;
+        print('Failed to login. Status Code: ${response.statusCode}');
+        final Map<String, dynamic> errorData = jsonDecode(utf8.decode(response.bodyBytes));
+        showErrorDialog(errorData['message'] ?? 'An unknown error occurred');
       }
+    } catch (e) {
+      statusRequest=StatusRequest.failure;
+      print('Error occurred while trying to register: $e');
+      showErrorDialog('Failed to process your request. Please try again later.');
     }
   }
-
-
   void showErrorDialog(String message) {
     Get.defaultDialog(
       title: "Warning",

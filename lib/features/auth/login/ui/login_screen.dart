@@ -111,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                           CustomButtonAuth(
                             textButton: 'Next',
                             onPressed: () {
-                              controller.login();
+                              controller.loginUser();
                             },
                             icon: Icons.arrow_forward_ios,
                           ),
