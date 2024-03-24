@@ -4,6 +4,7 @@ import 'package:iconly/iconly.dart';
 
 import '../ui/camera_screen.dart';
 import '../ui/home_screen.dart';
+import '../../update_user/user_screen.dart';
 import '../ui/user_screen.dart';
 
 abstract class HomeScreenBodyController extends GetxController {
@@ -15,7 +16,7 @@ class HomeScreenBodyControllerImpl extends HomeScreenBodyController {
   List<Widget> listPage = [
     HomeScreen(),
     CameraScreen(),
-    UserScreen()
+   UserScreen()
     //
     // const UserScreen(),
   ];

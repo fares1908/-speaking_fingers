@@ -7,4 +7,6 @@ class AppRouter {
   static const String onBoarding2 = '/onBoarding2';
   static const String  home = '/home';
   static const String verifyCodeSignUp = '/verifyCodeSignUp';
+  static const String favourite = '/favourite';
+  static const String editProfile = '/editProfile';
 }

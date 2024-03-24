@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:speaking_fingers/core/routes/AppRoute/routersName.dart';
 
 import 'package:speaking_fingers/features/auth/sign_up/ui/screens/siginup_screen.dart';
+import 'package:speaking_fingers/features/favourite/ui/favourite_screen.dart';
 import 'package:speaking_fingers/features/on_boarding/ui/screens/on_boarding.dart';
 import 'package:speaking_fingers/features/on_boarding/ui/screens/on_boarding1.dart';
+import 'package:speaking_fingers/features/update_user/user_screen.dart';
 
 import '../../../features/auth/login/ui/login_screen.dart';
 import '../../../features/auth/verfiy_code/ui/screen/verfiy_code.dart';
@@ -24,5 +26,6 @@ List<GetPage<dynamic>> ?routes=[
   GetPage(name: AppRouter.register, page:() => const SignupScreen()),
   GetPage(name: AppRouter.verifyCodeSignUp, page:() =>const VerifyCodeSignUp()),
   GetPage(name: AppRouter.home, page:() => const HomeScreenBody()),
-
+  GetPage(name: AppRouter.favourite, page:() =>  FavoriteScreen()),
+  GetPage(name: AppRouter.editProfile, page:() =>  const UpdateUserScreen()),
 ];

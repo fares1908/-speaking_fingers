@@ -71,37 +71,39 @@ class SignUpControllerImpl extends SignUpController {
   goToRegister() async {
     const String apiUrl = AppLink.signUp;
 
-    try {
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          'email': email.text,
-          'password': password.text,
-          'name':name.text
-        }),
-      );
+    if (formState.currentState!.validate()) {
+      try {
+        final response = await http.post(
+          Uri.parse(apiUrl),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(<String, String>{
+            'email': email.text,
+            'password': password.text,
+            'name':name.text
+          }),
+        );
 
-      if (response.statusCode == 200||response.statusCode ==201) {
-        final Map<String, dynamic> responseData = jsonDecode(response.body);
-        String userId =responseData ['user']['id'].toString();
-        print(userId); // This should now correctly print the user's id
-        Get.offNamed(AppRouter.verifyCodeSignUp, arguments: {"email": email.text, "id": userId});
+        if (response.statusCode == 200||response.statusCode ==201) {
+          final Map<String, dynamic> responseData = jsonDecode(response.body);
+          String userId =responseData ['user']['id'].toString();
+          print(userId); // This should now correctly print the user's id
+          Get.offNamed(AppRouter.verifyCodeSignUp, arguments: {"email": email.text, "id": userId});
 
-        print('Register successful');
-        print('Response Body: ${response.body}');
-      } else {
-        statusRequest=StatusRequest.serverFailure;
-        print('Failed to login. Status Code: ${response.statusCode}');
-        final Map<String, dynamic> errorData = jsonDecode(utf8.decode(response.bodyBytes));
-        showErrorDialog(errorData['message'] ?? 'An unknown error occurred');
+          print('Register successful');
+          print('Response Body: ${response.body}');
+        } else {
+          statusRequest=StatusRequest.serverFailure;
+          print('Failed to login. Status Code: ${response.statusCode}');
+          final Map<String, dynamic> errorData = jsonDecode(utf8.decode(response.bodyBytes));
+          showErrorDialog(errorData['message'] ?? 'An unknown error occurred');
+        }
+      } catch (e) {
+        statusRequest=StatusRequest.failure;
+        print('Error occurred while trying to register: $e');
+        showErrorDialog('Failed to process your request. Please try again later.');
       }
-    } catch (e) {
-      statusRequest=StatusRequest.failure;
-      print('Error occurred while trying to register: $e');
-      showErrorDialog('Failed to process your request. Please try again later.');
     }
   }
   void showErrorDialog(String message) {
