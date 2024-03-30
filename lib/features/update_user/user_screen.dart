@@ -19,91 +19,86 @@ class UpdateUserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-bottomSheet: SizedBox(
-  height: 90.h,
-  child: Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Column(
 
-      children: [
-        CustomButtonAuth(textButton: 'Update',
-        onPressed: () {
-
-        },
-        ),
-      ],
-    ),
-  ),
-),
-      appBar: AppBar(
-        backgroundColor: AppColors.themeColor,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-Get.back();
-          },
-          icon: Icon(Icons.arrow_back_ios_rounded,
-          color: Colors.black,
-          ),
-        ),
-      ),
-      body:Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-
-          Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Image.asset(
-                'assets/images/profile_shape.png',
-                fit: BoxFit.fill,
-                height: 300.h,
-                width: double.infinity,
-              ),
-
-              Positioned(
-                  top: 50,
-                  child: Text('Edit Profile',
-                  style: TextStyles.font20WhiteSemiBold.copyWith(color: Colors.black),
-                  )),
-              Padding(
-                padding: EdgeInsets.all(40.0),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 80,
-                      backgroundImage: NetworkImage('https://youssifallam.pythonanywhere.com/media/default.jpg'), // Replace with actual image URL
-                    ),
-                    SizedBox(height: 10,),
-
-                TextButton(
-                      onPressed: () {  print('dd');},
-                      child: Text(
-                        'Change Picture',
-                        style: TextStyles.font20WhiteSemiBold.copyWith(color: Colors.black,fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-
-            ],
-          ),
-
-          const Padding(
-            padding:
-            EdgeInsets.only(left: 20.0, right:20,top: 20),
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
+      body:SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+        
+            Stack(
+              alignment: Alignment.bottomCenter,
               children: [
-
-                ProfileInfoSection()
+                Image.asset(
+                  'assets/images/profile_shape.png',
+                  fit: BoxFit.fill,
+                  height: 400.h,
+                  width: double.infinity,
+                ),
+        
+                Positioned(
+                    top: 50,
+                    child: Text('Edit Profile',
+                    style: TextStyles.font20WhiteSemiBold.copyWith(color: Colors.black),
+                    )),
+                Positioned(
+                    top: 30,
+                    left: 5,
+                    child:IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(Icons.arrow_back_ios_new_rounded),
+                    )
+                ),
+                Padding(
+                  padding: EdgeInsets.all(40.0),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 80,
+                        backgroundImage: NetworkImage('https://youssifallam.pythonanywhere.com/media/default.jpg'), // Replace with actual image URL
+                      ),
+                      SizedBox(height: 10,),
+        
+                  TextButton(
+                        onPressed: () {  print('dd');},
+                        child: Text(
+                          'Change Picture',
+                          style: TextStyles.font20WhiteSemiBold.copyWith(color: Colors.black,fontSize: 16),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+        
+        
               ],
             ),
-          ),
-        ],
+        
+            const Padding(
+              padding:
+              EdgeInsets.only(left: 10.0, right:10),
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+        
+                  ProfileInfoSection()
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10,bottom: 10),
+              child: CustomButtonAuth(
+                textButton: 'Edit Profile',
+                onPressed: () {
+                  Get.toNamed(AppRouter.editProfile);
+                },
+              ),
+            ),
+          ],
+        ),
       ),
 
     );
@@ -160,13 +155,13 @@ class ProfileInfoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     MyServices services = Get.find();
     return Container(
-      padding: const EdgeInsets.all(16),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfileInfoTile(title: 'Your  Name', content: services.sharedPreferences.getString('name')!),
-          ProfileInfoTile(title: 'Email', content: services.sharedPreferences.getString('email')!),
-          ProfileInfoTile(title: 'Phone Number', content: services.sharedPreferences.getString('phone')!),
+          ProfileInfoTile(title: 'Your  Name', content: services.sharedPreferences.getString('name') ?? ''),
+          ProfileInfoTile(title: 'Email', content: services.sharedPreferences.getString('email') ?? ''),
+          ProfileInfoTile(title: 'Phone Number', content: services.sharedPreferences.getString('phone') ?? ''),
           const ProfileInfoTile(title: 'Password', content: '**********'),
           const SizedBox(height: 24),
 
