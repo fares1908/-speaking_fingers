@@ -41,7 +41,7 @@ dependencies:
   #state_mangment
   get: ^4.6.5
   #networking
-  http: ^0.13.6
+  http: ^1.2.1
   dartz: ^0.10.1
   #Images
   cached_network_image: ^3.3.1

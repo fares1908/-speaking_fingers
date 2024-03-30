@@ -1,117 +1,59 @@
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:speaking_fingers/core/class/apiManger.dart';
+import 'package:speaking_fingers/core/class/videoRespons.dart';
+import 'package:speaking_fingers/features/favourite/ui/widgets/custom_appBar_forHome.dart';
+import 'package:speaking_fingers/features/favourite/ui/widgets/custom_app_bar.dart';
+import 'package:speaking_fingers/features/favourite/ui/widgets/fav_video_card.dart';
+import 'package:speaking_fingers/features/favourite/ui/widgets/videoCard.dart';
+import 'package:speaking_fingers/features/favourite/ui/widgets/videoDetails.dart';
+import 'package:speaking_fingers/features/favourite/ui/widgets/videoItem.dart';
 
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // const HomeScreen({super.key});
+List<Video> videoList=[];
+
+Video? videoName;
 
   @override
   Widget build(BuildContext context) {
     // Get.put(HomePageControllerImpl());
     return Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Colors.white,
-        //   elevation: 0,
-        //   centerTitle: true,
-        //   leading: Padding(
-        //     padding: const EdgeInsets.all(8.0),
-        //     child: IconButton(
-        //       onPressed: () {},
-        //       icon: const Icon(
-        //         IconlyLight.search,
-        //         color: Colors.grey,
-        //       ),
-        //     ),
-        //   ),
-        //   title: Padding(
-        //     padding: const EdgeInsets.all(8.0),
-        //     child: Column(
-        //       children: [
-        //         Text(
-        //           'Make home',
-        //           style: TextStyles.font30GrayRegular.copyWith(fontSize: 18.sp),
-        //         ),
-        //         Text('BEAUTIFUL',
-        //             style:
-        //                 TextStyles.font24BlackBold.copyWith(fontSize: 21.sp)),
-        //       ],
-        //     ),
-        //   ),
-        //   actions: [
-        //     badges.Badge(
-        //       position: badges.BadgePosition.topEnd(top: 10, end: 10),
-        //       child: Padding(
-        //         padding: const EdgeInsets.all(8.0),
-        //         child: IconButton(
-        //           icon: const Icon(
-        //             Icons.shopping_cart_outlined,
-        //             color: Colors.grey,
-        //             size: 30,
-        //           ),
-        //           onPressed: () {},
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // ),
-        // body: GetBuilder<HomePageControllerImpl>(
-        //   builder: (controller) => ListView(
-        //     children: [
-        //       Padding(
-        //         padding: const EdgeInsets.all(8.0),
-        //         child: SizedBox(
-        //           height: 85.h,
-        //           child: ListView.separated(
-        //             separatorBuilder: (context, index) => horizontalSpace(1),
-        //             scrollDirection: Axis.horizontal,
-        //             itemBuilder: (context, index) => GestureDetector(
-        //               onTap: () {
-        //                 print('f');
-        //               },
-        //               child: Column(
-        //                 crossAxisAlignment: CrossAxisAlignment.center,
-        //                 children: [
-        //                   Container(
-        //                     padding: const EdgeInsets.all(10),
-        //                     margin: const EdgeInsets.only(left: 15),
-        //                     height: 48.h,
-        //                     width: 48.w,
-        //                     decoration: BoxDecoration(
-        //                       color: Colors.grey.withOpacity(.4),
-        //                       borderRadius: BorderRadius.circular(12),
-        //                     ),
-        //                     child: CachedNetworkImage(
-        //
-        //                       imageUrl:
-        //                           '${AppLink.server}/uploads/categories/${controller.categories[index].categoryImage}',
-        //                       progressIndicatorBuilder:
-        //                           (context, url, downloadProgress) =>
-        //                               CircularProgressIndicator(
-        //                                   value: downloadProgress.progress),
-        //                       errorWidget: (context, url, error) =>
-        //                           Icon(Icons.error),
-        //                     ),
-        //
-        //                   ),
-        //                   verticalSpace(5),
-        //                   Text(
-        //                     '${controller.categories[index].categoryName}',
-        //                     style: TextStyles.font14GrayRegular,
-        //
-        //                   ),
-        //                 ],
-        //               ),
-        //             ),
-        //             itemCount: controller.categories.length,
-        //           ),
-        //         ),
-        //       )
-        //     ],
-        //   ),
-        // ));
-body: Text(
-  'fffffff'
-),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(200.0), // Adjust the height here as needed
+        child:
+        // VideoDetails(),
+        CustomAppBarHome(),
+      ),
+      body:
+      selectedItemClicked == 2
+          ? VideoItem(onVideoItemclicked:onVideoItemclicked,)
+          : selectedIndex == null || selectedItemClicked == 1
+          ?VideoCard(onvideoCardClicked:onvideoCardClicked ,):
+          VideoDetails(videoList: [],),
     );
+
   }
+
+int selectedItemClicked = 2;
+
+void onVideoItemclicked(int newSelectedItemClicked) {
+  selectedItemClicked = newSelectedItemClicked;
+  setState(() {});
+}
+
+VideoCard? selectedIndex = null;
+
+void onvideoCardClicked(VideoCard videoCard) {
+  selectedIndex = videoCard;
+  setState(() {});
+}
+
 }
