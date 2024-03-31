@@ -19,7 +19,7 @@ class ScanScreen extends StatelessWidget {
                 // Since you've initialized them with 0.0, direct multiplication should be safe,
                 // but let's be defensive in practice.
                 top: (controller.y ?? 0.0) * 700,
-                right: (controller.x ?? 0.0) * 500,
+                right: (controller.x ?? 0) * 500,
                 child: Container(
                   width: ((controller.w ?? 0.0) * 100) * MediaQuery.of(context).size.width / 100,
                   height: ((controller.h ?? 0.0) * 100) * MediaQuery.of(context).size.height / 100,
