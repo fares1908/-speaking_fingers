@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:speaking_fingers/features/camera/ui/scan_screen.dart';
 
+import '../../camera/ui/camera_tab.dart';
 import '../ui/camera_screen.dart';
 import '../ui/home_screen.dart';
 import '../../update_user/user_screen.dart';
@@ -16,7 +17,7 @@ class HomeScreenBodyControllerImpl extends HomeScreenBodyController {
   int currentPage = 0;
   List<Widget> listPage = [
     HomeScreen(),
-    ScanScreen(),
+    TabBarTopScreen(),
     // CameraScreen(),
    UserScreen()
     //
