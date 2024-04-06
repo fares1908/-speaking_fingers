@@ -1,13 +1,18 @@
 <manifest xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:ignore="ExtraText">
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-feature android:name="android.hardware.camera.any"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
     <uses-sdk tools:overrideLibrary="org.tensorflow.tflite_flutter" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
 
     <application
+        android:extractNativeLibs="true"
         android:label="speaking_fingers"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

@@ -23,17 +23,17 @@ class ScanController extends GetxController {
 
   Future<void> loadModel() async {
     try {
-      final byteData = await rootBundle.load("assets/images/tflite.tflite");
+      final byteData = await rootBundle.load("assets/tflite.tflite");
       log("Model size: ${byteData.lengthInBytes} bytes");
 
       // Load the labels from the labels file
-      final labelsData = await rootBundle.loadString("assets/images/labels.txt");
+      final labelsData = await rootBundle.loadString("assets/labels.txt");
       log("Labels data: $labelsData"); // Add this line for debugging
 
       final String labels = labelsData.trim(); // Remove leading/trailing whitespace
 
       await Tflite.loadModel(
-        model: "assets/images/tflite.tflite",
+        model: "assets/tflite.tflite",
         labels: labels, // Pass the loaded labels as a single string
         isAsset: true,
         numThreads: 1,
