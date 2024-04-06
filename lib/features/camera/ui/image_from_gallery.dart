@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:speaking_fingers/core/class/my_services.dart';
+import 'package:speaking_fingers/core/theming/colors.dart';
 
 class ImagePickScreen extends StatefulWidget {
   @override
@@ -83,11 +84,12 @@ MyServices myServices=Get.find();
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+
           ElevatedButton(
             onPressed: pickImage,
-            child: Text('Pick Image From Gallery'),
+            child: const Text('Pick Image From Gallery'),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           // Check if an image has been picked
           _image != null
               ? Container(
@@ -101,9 +103,32 @@ MyServices myServices=Get.find();
               ),
             ),
           )
-              : Text('No image selected.'),
-          SizedBox(height: 20),
-          _responseLetter != null ? Text('Detected Letter: $_responseLetter') : Container(),
+              : const Text('No image selected.'),
+          const SizedBox(height: 20),
+          _responseLetter != null ? Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8), // Rounded corners
+              color: AppColors.themeColor,
+            ),
+
+              height: 50,
+              width: 200,
+              child: Center(
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: DefaultTextStyle.of(context).style, // Default text style
+                    children: <TextSpan>[
+                      const TextSpan(text: 'Detected Letter : ', style: TextStyle(color: Colors.black)),
+                      TextSpan(text: _responseLetter, style: const TextStyle(color: Colors.white,
+                      fontSize: 12
+                      )), // Customize color as needed
+                    ],
+                  ),
+                )
+
+              ),
+          ) : Container(),
         ],
       ),
     );
