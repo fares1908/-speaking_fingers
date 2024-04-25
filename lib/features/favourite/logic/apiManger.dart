@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:speaking_fingers/core/class/videoResponse.dart';
+import 'package:speaking_fingers/features/favourite/logic/videoResponse.dart';
 
 class apiManger {
   // https://youssifallam.pythonanywhere.com/api/v1/Videos/Get_All_Videos/

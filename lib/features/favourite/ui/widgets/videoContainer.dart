@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:speaking_fingers/core/class/videoResponse.dart';
+import 'package:speaking_fingers/features/favourite/logic/videoResponse.dart';
 import 'package:speaking_fingers/features/favourite/ui/widgets/videoItem.dart';
 
 class VideoContainer extends StatelessWidget {

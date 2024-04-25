@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:speaking_fingers/core/class/apiManger.dart';
-import 'package:speaking_fingers/core/class/videoResponse.dart';
+import 'package:speaking_fingers/features/favourite/logic/apiManger.dart';
+import 'package:speaking_fingers/features/favourite/logic/videoResponse.dart';
 import 'package:speaking_fingers/features/favourite/ui/widgets/videoContainer.dart';
 
 import '../../favourite/ui/widgets/custom_appBar_forHome.dart';
