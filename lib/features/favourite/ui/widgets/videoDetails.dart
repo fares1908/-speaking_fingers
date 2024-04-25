@@ -16,11 +16,11 @@ class VideoDetails extends StatelessWidget {
       future: apiManger.getVideos(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
           print('error');
-          return Text('Something went wrong');
+          return const Text('Something went wrong');
         }
         if (snapshot.data?.status != "success") {
           return Text(snapshot.data?.message ?? '');
@@ -31,7 +31,7 @@ class VideoDetails extends StatelessWidget {
         if (videoList != null) {
           return VideoContainer(videoList: videoList, isFavorited: true);
         } else {
-          return Text('No videos found');
+          return const Text('No videos found');
         }
       },
     );

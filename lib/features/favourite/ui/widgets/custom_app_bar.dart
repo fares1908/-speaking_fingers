@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget {
         color: Colors.lightBlue.shade300,
         child:  SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(left: 12, right: 12, bottom: 12),
+            padding: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
             child: Column(
               children: <Widget>[
                 Row(
@@ -21,14 +21,14 @@ class CustomAppBar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start
                       ,
                       children: [
-                        BackButton(color: Colors.black),
+                        const BackButton(color: Colors.black),
                         Text(
                           'Your Favourite',
                           style: TextStyles.font20WhiteSemiBold.copyWith(color: Colors.black,fontSize: 16),
                         ),
                       ],
                     ),
-                    CircleAvatar(
+                    const CircleAvatar(
                       // Replace with your actual image source
                       backgroundImage: NetworkImage('https://via.placeholder.com/150'),
                     ),

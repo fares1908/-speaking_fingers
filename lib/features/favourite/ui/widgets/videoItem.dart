@@ -13,53 +13,50 @@ class VideoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child:
-          Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Container(
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height * 0.5,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
-            //  color: Colors.grey.shade300,
+    return Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Container(
+    width: double.infinity,
+    height: MediaQuery.of(context).size.height * 0.5,
+    decoration: const BoxDecoration(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+      //  color: Colors.grey.shade300,
+    ),
+    child: Image.network(video.thumbnail ?? ''),
+            ),
+            Padding(
+    padding: const EdgeInsets.all(8),
+    child: Row(
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          video.title ?? '',
+          style: const TextStyle(
+            color: Colors.black54,
+            fontWeight: FontWeight.bold,
           ),
-          child: Image.network(video.thumbnail ?? ''),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                video.title ?? '',
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              // Text(
-              //   video.videoFile??'',
-              //   style:  TextStyle(
-              //     color: Colors.black54,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
-              // Text(
-              //   video.description??'',
-              //   style:  TextStyle(
-              //     color: Colors.black54,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
+        // Text(
+        //   video.videoFile??'',
+        //   style:  TextStyle(
+        //     color: Colors.black54,
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
+        // Text(
+        //   video.description??'',
+        //   style:  TextStyle(
+        //     color: Colors.black54,
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
 
-              Icon(
-                isFavorited ? Icons.favorite_outlined : Icons.favorite_outline,
-                color: isFavorited ? Colors.red : Colors.grey,
-              ),
-            ],
-          ),
+        Icon(
+          isFavorited ? Icons.favorite_outlined : Icons.favorite_outline,
+          color: isFavorited ? Colors.red : Colors.grey,
         ),
-      ]),
-    );
+      ],
+    ),
+            ),
+          ]);
   }
 }

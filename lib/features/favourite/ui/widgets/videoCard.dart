@@ -4,7 +4,7 @@ class VideoCard extends StatelessWidget {
   Function onvideoCardClicked;
   final bool isFavorited;
 
-  VideoCard({
+  VideoCard({super.key,
     required this.isFavorited,
     required this.onvideoCardClicked,
   });

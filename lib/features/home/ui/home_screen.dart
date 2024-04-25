@@ -1,36 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:speaking_fingers/core/class/apiManger.dart';
 import 'package:speaking_fingers/core/class/videoResponse.dart';
-import 'package:speaking_fingers/features/favourite/ui/widgets/custom_appBar_forHome.dart';
-import 'package:speaking_fingers/features/favourite/ui/widgets/videoDetails.dart';
+import 'package:speaking_fingers/features/favourite/ui/widgets/videoContainer.dart';
 
+import '../../favourite/ui/widgets/custom_appBar_forHome.dart';
 
 class HomeScreen extends StatelessWidget {
-  // const HomeScreen({super.key});
-  List<Video> videoList = [];
-  Video? videoName;
-
   @override
   Widget build(BuildContext context) {
-    // Get.put(HomePageControllerImpl());
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(200.0),
-        // Adjust the height here as needed
-        child:
-            // VideoDetails();
-            CustomAppBarHome(),
+        child: CustomAppBarHome(),
       ),
-      body:
-          //
-          Container(
-              //color: Colors.orange,
-              child: VideoDetails()),
+      body: VideoDetails(),
+    );
+  }
+}
 
-      // VideoCard(
-      //  videoName:'videoName $index' ,
-      // videosList: videoList, // Replace with actual data
-      // isFavorited: false, // Replace with actual data
-      // );
+class VideoDetails extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<VideoResponse>(
+      future:  apiManger.getVideos(), // Assuming ApiManager is correctly implemented
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError) {
+          print('Error: ${snapshot.error}');
+          return Text('Something went wrong');
+        }
+        if (snapshot.data?.status != "success") {
+          return Text(snapshot.data?.message ?? '');
+        }
+
+        List<Video>? videoList = snapshot.data?.data?.videos;
+
+        if (videoList != null && videoList.isNotEmpty) {
+          return VideoContainer(videoList: videoList, isFavorited: true);
+        } else {
+          return Text('No videos found');
+        }
+      },
     );
   }
 }
