@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:speaking_fingers/features/favourite/logic/videoResponse.dart';
 
 class VideoItem extends StatelessWidget {
-  // Function onVideoItemclicked;
-  Video video;
+  Videos video;
   final bool isFavorited;
 
   VideoItem({
@@ -13,50 +12,37 @@ class VideoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Container(
-    width: double.infinity,
-    height: MediaQuery.of(context).size.height * 0.5,
-    decoration: const BoxDecoration(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-      //  color: Colors.grey.shade300,
-    ),
-    child: Image.network(video.thumbnail ?? ''),
-            ),
-            Padding(
-    padding: const EdgeInsets.all(8),
-    child: Row(
-      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          video.title ?? '',
-          style: const TextStyle(
-            color: Colors.black54,
-            fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      child:
+          Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Container(
+          width: double.infinity,
+          height: 150,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+          ),
+          child: Image.network(video.thumbnail ?? ''),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                video.title ?? '',
+                style: const TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Icon(
+                isFavorited ? Icons.favorite_outlined : Icons.favorite_outline,
+                color: isFavorited ? Colors.red : Colors.grey,
+              ),
+            ],
           ),
         ),
-        // Text(
-        //   video.videoFile??'',
-        //   style:  TextStyle(
-        //     color: Colors.black54,
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
-        // Text(
-        //   video.description??'',
-        //   style:  TextStyle(
-        //     color: Colors.black54,
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
-
-        Icon(
-          isFavorited ? Icons.favorite_outlined : Icons.favorite_outline,
-          color: isFavorited ? Colors.red : Colors.grey,
-        ),
-      ],
-    ),
-            ),
-          ]);
+      ]),
+    );
   }
 }

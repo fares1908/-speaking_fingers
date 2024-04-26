@@ -3,7 +3,7 @@ import 'package:speaking_fingers/features/favourite/logic/videoResponse.dart';
 import 'package:speaking_fingers/features/favourite/ui/widgets/videoItem.dart';
 
 class VideoContainer extends StatelessWidget {
-  final List<Video> videoList;
+  final List<Videos> videoList;
   final bool isFavorited;
 
   VideoContainer({
@@ -24,7 +24,9 @@ class VideoContainer extends StatelessWidget {
       itemCount: videoList.length,
       itemBuilder: (context, index) {
         final video = videoList[index];
-        return VideoItem(video: video, isFavorited: isFavorited);
+        return InkWell(
+            onTap: () {},
+            child: VideoItem(video: video, isFavorited: isFavorited));
       },
     );
   }

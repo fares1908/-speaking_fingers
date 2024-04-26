@@ -45,12 +45,12 @@ class Data {
     if (json['videos'] != null) {
       videos = [];
       json['videos'].forEach((v) {
-        videos?.add(Video.fromJson(v));
+        videos?.add(Videos.fromJson(v));
       });
     }
   }
 
-  List<Video>? videos;
+  List<Videos>? videos;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -67,8 +67,8 @@ class Data {
 /// video_file : "https://youssifallam.pythonanywhere.com/media/videos/%D8%A7%D9%84%D8%AD%D8%B1%D9%88%D9%81_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_%D8%A8%D9%84%D8%BA%D8%A9_%D8%A7%D9%84%D8%A5%D8%B4%D8%A7%D8%B1%D8%A9.mp4"
 /// thumbnail : "https://youssifallam.pythonanywhere.com/media/video_thumbnails/Screenshot_316.png"
 
-class Video {
-  Video({
+class Videos {
+  Videos({
     this.id,
     this.title,
     this.description,
@@ -76,7 +76,7 @@ class Video {
     this.thumbnail,
   });
 
-  Video.fromJson(dynamic json) {
+  Videos.fromJson(dynamic json) {
     id = json['id'];
     title = json['title'];
     description = json['description'];
