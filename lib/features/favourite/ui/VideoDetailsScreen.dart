@@ -119,8 +119,28 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                     fontSize: 16, fontWeight: FontWeight.w400),
               ),
             ),
+            // Exclude the selected video from the list
+            ...widget.allVideos.where((v) => v != widget.video).map((video) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  leading: video.thumbnail != null ? Image.network(video.thumbnail!) : Placeholder(), // Display thumbnail if available, else display a placeholder
+                  title: Text(video.title ?? 'No Title'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VideoDetailsScreen(
+                          video: video,
+                          allVideos: widget.allVideos,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
 
-            // Add more widgets here for other video details if necessary
+            }).toList(),
           ],
         ),
       ),
