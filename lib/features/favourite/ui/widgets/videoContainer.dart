@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:speaking_fingers/features/favourite/logic/videoResponse.dart';
 import 'package:speaking_fingers/features/favourite/ui/widgets/videoItem.dart';
 
+import '../VideoDetailsScreen.dart';
+
 class VideoContainer extends StatelessWidget {
   final List<Videos> videoList;
   final bool isFavorited;
@@ -24,9 +26,17 @@ class VideoContainer extends StatelessWidget {
       itemCount: videoList.length,
       itemBuilder: (context, index) {
         final video = videoList[index];
-        return InkWell(
-            onTap: () {},
-            child: VideoItem(video: video, isFavorited: isFavorited));
+       return InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => VideoDetailsScreen(video: video, allVideos: videoList,),
+              ),
+            );
+          },
+          child: VideoItem(video: video, isFavorited: isFavorited),
+        );
+
       },
     );
   }
