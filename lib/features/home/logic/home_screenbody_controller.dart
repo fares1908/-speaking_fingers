@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
+<<<<<<< Updated upstream
 import 'package:speaking_fingers/features/camera/ui/scan_screen.dart';
 
 import '../../camera/ui/camera_tab.dart';
+=======
+>>>>>>> Stashed changes
 import '../ui/camera_screen.dart';
 import '../ui/home_screen.dart';
-import '../../update_user/user_screen.dart';
 import '../ui/user_screen.dart';
 
 abstract class HomeScreenBodyController extends GetxController {
