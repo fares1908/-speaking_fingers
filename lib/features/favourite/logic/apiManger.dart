@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:speaking_fingers/features/favourite/logic/ResModel.dart';
 import 'package:speaking_fingers/features/favourite/logic/videoDetailsResponse.dart';
@@ -18,9 +19,15 @@ class apiManger {
     var json = jsonDecode(bodyString);
     var videoResponse = VideoResponse.fromJson(json);
     if (response.statusCode == 200) {
-      print(response);
-      print(videoResponse);
-      print(json);
+      if (kDebugMode) {
+        print(response);
+      }
+      if (kDebugMode) {
+        print(videoResponse);
+      }
+      if (kDebugMode) {
+        print(json);
+      }
       return videoResponse;
     } else {
       throw Exception('Failed to load album');
@@ -42,9 +49,13 @@ class apiManger {
     var videoDetailsResponse = VideoDetailsResponse.fromJson(json);
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      if (kDebugMode) {
+        print(await response.stream.bytesToString());
+      }
     } else {
-      print(response.reasonPhrase);
+      if (kDebugMode) {
+        print(response.reasonPhrase);
+      }
     }
     return videoDetailsResponse;
   }
@@ -70,27 +81,4 @@ class apiManger {
   }
 }
 
-/*var body = await response.stream.bytesToString();
-var responseModel = RespModel.fromJson(jsonDecode(body));
 
-
- return responseModel;*/
-
-// static Future<VideoDetailsResponse> getVideoDetails() async {
-//   var headers = {
-//     'Authorization':
-//         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE1MjgxNjE5LCJpYXQiOjE3MTM5ODU2MTksImp0aSI6IjNkYjYwMTI5NWRhOTQyOThhODg2Y2Y5ZmM4M2ZiMDZjIiwidXNlcl9pZCI6MTc1fQ.WGZD3If4Oe8RskXO2AoBTcGSaSAh0MHGtxoC8uq-xqE'
-//   };
-//   var url = Uri.http(
-//       baseUrl, '/api/v1/Videos/Get-Video-Details/?video_title=lesson 1');
-//   var response = await http.get(url, headers: headers);
-//  // response.headers.addAll(headers);
-//   var bodyString = response.body;
-//   var json = jsonDecode(bodyString);
-//   var videoDetailsResponse = VideoDetailsResponse.fromJson(json);
-//
-//    print(response);
-//    print(bodyString);
-//     return videoDetailsResponse;
-//
-//   }

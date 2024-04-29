@@ -47,7 +47,7 @@ class _CameraScreenState extends State<CameraScreen> {
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(6))),
                             backgroundColor:
-                                MaterialStatePropertyAll(AppColors.themeColor)),
+                                const MaterialStatePropertyAll(AppColors.themeColor)),
                         onPressed: () {},
                         child: Text(
                           'Camera',
@@ -94,7 +94,7 @@ class _CameraScreenState extends State<CameraScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
-                        child: CircleAvatar(
+                        child: const CircleAvatar(
                           backgroundColor: Colors.white,
                         ),
                         onTap: () {},
@@ -116,8 +116,8 @@ class _CameraScreenState extends State<CameraScreen> {
                         decoration: BoxDecoration(
                             color: AppColors.themeColor.withOpacity(.4),
                             borderRadius: BorderRadius.circular(8)),
-                        padding: EdgeInsets.all(6),
-                        child: Text(
+                        padding: const EdgeInsets.all(6),
+                        child: const Text(
                           'Commodo proin diam amet facilisis ac in in nibh. '
                           'Sed nisl nunc ante malesuada. Elit amet vulputate '
                           'loreet dictum. Aliquet aliquam nullam nisi malesuada ipsum.',
@@ -135,13 +135,13 @@ class _CameraScreenState extends State<CameraScreen> {
                               borderRadius: BorderRadius.circular(5)),
                           height: 30,
                           child: DropdownButton<String>(
-                            icon: Icon(Icons.keyboard_arrow_down_outlined),
+                            icon: const Icon(Icons.keyboard_arrow_down_outlined),
                             hint: Text(
                               'Languages',
                               style: TextStyles.font20WhiteSemiBold
                                   .copyWith(color: Colors.black, fontSize: 12),
                             ),
-                            padding: EdgeInsets.all(6),
+                            padding: const EdgeInsets.all(6),
                             borderRadius: BorderRadius.circular(6),
                             items: <String>['Languages', 'More', 'Options']
                                 .map((String value) {
@@ -171,7 +171,7 @@ class _CameraScreenState extends State<CameraScreen> {
                        mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             IconButton(
-                              icon: Icon(Icons.play_arrow,
+                              icon: const Icon(Icons.play_arrow,
                               size: 30,
                               ),
                               onPressed: () {
