@@ -20,14 +20,17 @@ class VideoItem extends StatelessWidget {
               padding: EdgeInsets.only(right: 12, left: 12),
               width: double.infinity,
               height: 140,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+              ),
               child: Image.network(
                 video.thumbnail ?? '',
                 fit: BoxFit.cover,
               ),
             ),
             Container(
-              padding: EdgeInsets.all(15),
-              margin: EdgeInsets.only(top: 10, bottom: 15),
+              padding: EdgeInsets.all(12),
+              margin: EdgeInsets.only(bottom: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -36,7 +39,6 @@ class VideoItem extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,
-                      fontSize: 22,
                     ),
                   ),
                   Icon(
