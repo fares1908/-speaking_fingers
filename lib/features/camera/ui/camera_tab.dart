@@ -3,6 +3,7 @@ import 'package:speaking_fingers/core/theming/colors.dart';
 import 'package:speaking_fingers/features/camera/ui/scan_screen.dart';
 
 import 'image_from_gallery.dart';
+import 'media_pip.dart';
 
 // Assuming ScanScreen class remains unchanged
 
@@ -10,13 +11,13 @@ class TabBarTopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2, // Total number of tabs
+      length: 3, // Total number of tabs
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
 
-          title: Text('Top Tab Bar Example'),
-          bottom: TabBar(
+          title: const Text('Top Tab Bar Example'),
+          bottom: const TabBar(
             tabs: [
               Tab(
                 icon: Icon(Icons.browse_gallery_outlined,
@@ -30,6 +31,11 @@ class TabBarTopScreen extends StatelessWidget {
 
                 )
               ),
+              Tab(
+                  icon: Icon(Icons.perm_media_outlined,color: AppColors.themeColor,
+
+                  )
+              ),
             ],
           ),
         ),
@@ -37,6 +43,7 @@ class TabBarTopScreen extends StatelessWidget {
           children: [
             ImagePickScreen(),
             const ScanScreen(), // Your ScanScreen as the second tab
+            MediaPip(),
          ],
         ),
       ),
