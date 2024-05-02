@@ -13,36 +13,42 @@ class VideoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child:
-          Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Container(
-          width: double.infinity,
-          height: 150,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-          ),
-          child: Image.network(video.thumbnail ?? ''),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                video.title ?? '',
-                style: const TextStyle(
-                  color: Colors.black54,
-                  fontWeight: FontWeight.bold,
-                ),
+      child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: EdgeInsets.only(right: 12, left: 12),
+              width: double.infinity,
+              height: 140,
+              child: Image.network(
+                video.thumbnail ?? '',
+                fit: BoxFit.cover,
               ),
-              Icon(
-                isFavorited ? Icons.favorite_outlined : Icons.favorite_outline,
-                color: isFavorited ? Colors.red : Colors.grey,
+            ),
+            Container(
+              padding: EdgeInsets.all(15),
+              margin: EdgeInsets.only(top: 10, bottom: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    video.title ?? '',
+                    style: const TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                  ),
+                  Icon(
+                    isFavorited
+                        ? Icons.favorite_outlined
+                        : Icons.favorite_outline,
+                    color: isFavorited ? Colors.red : Colors.grey,
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ]),
+            ),
+          ]),
     );
   }
 }

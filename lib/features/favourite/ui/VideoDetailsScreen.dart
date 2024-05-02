@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:speaking_fingers/features/favourite/logic/videoResponse.dart';
+import 'package:speaking_fingers/features/favourite/ui/widgets/custom_appBar_forvideoDetails.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoDetailsScreen extends StatefulWidget {
@@ -72,14 +73,19 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.video.title ?? 'Video Details'),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(200.0),
+        child: CustomAppBarVideoDetails(),
       ),
+      // AppBar(
+      //   title: Text(widget.video.title ?? 'Video Details'),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              padding: EdgeInsets.only(left: 12, right: 12, bottom: 12),
               height: 250,
               width: double.infinity,
               child: FutureBuilder(
@@ -111,20 +117,42 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                widget.video.description ?? 'No Description',
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w400),
+            Container(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.video.title ?? 'No title',
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w400),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    widget.video.description ?? 'No Description',
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w400),
+                  ),
+                ],
               ),
             ),
             // Exclude the selected video from the list
             ...widget.allVideos.where((v) => v != widget.video).map((video) {
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(
+                  top: 12,
+                  bottom: 12,
+                ),
                 child: ListTile(
-                  leading: video.thumbnail != null ? Image.network(video.thumbnail!) : Placeholder(), // Display thumbnail if available, else display a placeholder
+                  leading: video.thumbnail != null
+                      ? Image.network(
+                          video.thumbnail!,
+                          fit: BoxFit.fill,
+                        )
+                      : Placeholder(),
+                  // Display thumbnail if available, else display a placeholder
                   title: Text(video.title ?? 'No Title'),
                   onTap: () {
                     Navigator.push(

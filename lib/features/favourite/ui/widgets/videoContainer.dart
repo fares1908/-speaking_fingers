@@ -16,12 +16,11 @@ class VideoContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: const EdgeInsets.all(8),
+      // padding: const EdgeInsets.all(8),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 2,
-        mainAxisSpacing: 2,
-
+        mainAxisSpacing: 30,
       ),
       itemCount: videoList.length,
       itemBuilder: (context, index) {

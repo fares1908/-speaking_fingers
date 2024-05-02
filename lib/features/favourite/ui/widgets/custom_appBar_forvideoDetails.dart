@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:speaking_fingers/core/theming/text_styles.dart';
+import 'package:speaking_fingers/features/favourite/logic/videoResponse.dart';
 
-import '../../../../core/theming/text_styles.dart';
-class CustomAppBarHome extends StatelessWidget {
+class CustomAppBarVideoDetails extends StatefulWidget {
+  Videos? video;
+
+  // CustomAppBarVideoDetails(
+  // {required this.video}
+  //     );
+
+  @override
+  State<CustomAppBarVideoDetails> createState() =>
+      _CustomAppBarVideoDetailsState();
+}
+
+class _CustomAppBarVideoDetailsState extends State<CustomAppBarVideoDetails> {
   @override
   Widget build(BuildContext context) {
     return ClipPath(
@@ -9,25 +22,24 @@ class CustomAppBarHome extends StatelessWidget {
       child: Container(
         height: 180,
         color: Colors.lightBlue.shade300,
-        child:  SafeArea(
+        child: SafeArea(
           child: Column(
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 20),
+                    margin: EdgeInsets.symmetric(vertical: 30),
                     child: Row(
                       children: [
                         Text(
-                          'Introductory Videos',
-                          style: TextStyles.font20WhiteSemiBold.copyWith(
-                              color: Colors.black, fontSize: 20),
+                          widget.video?.title ?? 'Video Details',
+                          style: TextStyles.font20WhiteSemiBold
+                              .copyWith(color: Colors.black, fontSize: 20),
                         ),
                       ],
                     ),
                   ),
-
                 ],
               ),
             ],
@@ -37,6 +49,7 @@ class CustomAppBarHome extends StatelessWidget {
     );
   }
 }
+
 class AppBarClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
