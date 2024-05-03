@@ -17,11 +17,13 @@ class VideoItem extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              padding: EdgeInsets.only(right: 12, left: 12),
+              padding: const EdgeInsets.only(right: 12, left: 12),
               width: double.infinity,
               height: 140,
               decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(10)
+
+                ),
               ),
               child: Image.network(
                 video.thumbnail ?? '',
@@ -29,8 +31,8 @@ class VideoItem extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(12),
-              margin: EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(bottom: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
