@@ -63,7 +63,7 @@ class OnBoardingScreen1 extends StatelessWidget {
                       child: const Text(
                         'Speaking Fingers',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -79,7 +79,7 @@ class OnBoardingScreen1 extends StatelessWidget {
                     child: Text(
                         'Professional application to \n convert sign language to\n text & record',
                         style: TextStyles.font13BlackRegular
-                            .copyWith(fontSize: 16)),
+                            .copyWith(fontSize: 12)),
                   ),
                 ),
               ],

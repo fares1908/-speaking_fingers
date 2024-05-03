@@ -1,11 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:speaking_fingers/core/theming/colors.dart';
-import 'package:speaking_fingers/core/theming/text_styles.dart';
 import 'package:speaking_fingers/features/on_boarding/ui/screens/on_boarding.dart';
-import 'package:speaking_fingers/features/on_boarding/ui/screens/on_boarding1.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,7 +18,7 @@ class _splashScreenState extends State<SplashScreen> {
      Timer(
         const Duration(seconds: 4),
         () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (BuildContext context) => OnBoardingScreen1())));
+            builder: (BuildContext context) => OnBoarding())));
 
     return Container(
       decoration: const BoxDecoration(
@@ -30,33 +27,33 @@ class _splashScreenState extends State<SplashScreen> {
           AppColors.stackShape,
           AppColors.minColor,
         ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
       )),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Image.asset('assets/images/pattern.png'),
           Image.asset(
-            'assets/images/Group 2.png',
+            'assets/images/newLogo.png',
             // width: double.infinity,
             // height: double.infinity,
             // fit: BoxFit.fill,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-          Image.asset(
-            'assets/images/Group 1.png',
-            // width: double.infinity,
-            // height: double.infinity,
-            // fit: BoxFit.fill,
-          ),
+          // SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          // Image.asset(
+          //   'assets/images/Group 1.png',
+          //   // width: double.infinity,
+          //   // height: double.infinity,
+          //   // fit: BoxFit.fill,
+          // ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-          Material(
-              color: Colors.transparent,
-              child: Text(
-                'Speaking Fingers',
-                style: TextStyles.font20WhiteBold,
-              ))
+          // Material(
+          //     color: Colors.transparent,
+          //     child: Text(
+          //       'Speaking Fingers',
+          //       style: TextStyles.font20WhiteBold,
+          //     ))
         ],
       ),
     );
