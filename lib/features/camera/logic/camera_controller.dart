@@ -21,20 +21,20 @@ class ScanController extends GetxController {
     loadModel().then((_) => initCamera());
   }
 
+
   Future<void> loadModel() async {
     try {
       final byteData = await rootBundle.load("assets/tflite.tflite");
       log("Model size: ${byteData.lengthInBytes} bytes");
 
-      // Load the labels from the labels file
+      // Debugging: Load and print the labels
       final labelsData = await rootBundle.loadString("assets/labels.txt");
-      log("Labels data: $labelsData"); // Add this line for debugging
-
-      final String labels = labelsData.trim(); // Remove leading/trailing whitespace
+      final String labels = labelsData.split('\n').map((label) => label.trim()).where((label) => label.isNotEmpty).join(',');
+      log("Labels: $labels");
 
       await Tflite.loadModel(
         model: "assets/tflite.tflite",
-        labels: labels, // Pass the loaded labels as a single string
+        labels: labels,
         isAsset: true,
         numThreads: 1,
         useGpuDelegate: false,
@@ -45,6 +45,9 @@ class ScanController extends GetxController {
       log("Failed to load model: $e");
     }
   }
+
+
+
 
 
 

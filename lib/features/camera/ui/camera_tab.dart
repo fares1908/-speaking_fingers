@@ -11,7 +11,7 @@ class TabBarTopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2, // Total number of tabs
+      length: 3, // Total number of tabs
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -26,11 +26,11 @@ class TabBarTopScreen extends StatelessWidget {
                 )
 
               ),
-              // Tab(
-              //   icon: Icon(Icons.camera,color: AppColors.themeColor,
-              //
-              //   )
-              // ),
+              Tab(
+                icon: Icon(Icons.camera,color: AppColors.themeColor,
+
+                )
+              ),
               Tab(
                   icon: Icon(Icons.perm_media_outlined,color: AppColors.themeColor,
 
@@ -42,7 +42,7 @@ class TabBarTopScreen extends StatelessWidget {
         body: TabBarView(
           children: [
             ImagePickScreen(),
-            // const ScanScreen(), // Your ScanScreen as the second tab
+            const ScanScreen(), // Your ScanScreen as the second tab
             MediaPip(),
          ],
         ),
