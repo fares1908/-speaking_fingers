@@ -1,10 +1,8 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:speaking_fingers/core/routes/AppRoute/routersName.dart';
-import 'package:speaking_fingers/core/theming/colors.dart';
 import 'package:speaking_fingers/features/auth/widgets/custom_matrialbutton.dart';
 
 import '../../core/class/my_services.dart';
@@ -17,15 +15,14 @@ class UpdateUserScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    MyServices services = Get.find();
+    Get.put(MyServices());
     return Scaffold(
-
-      body:SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-        
             Stack(
               alignment: Alignment.bottomCenter,
               children: [
@@ -83,17 +80,25 @@ class UpdateUserScreen extends StatelessWidget {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
         
-                  ProfileInfoSection()
-                ],
+                  ProfileInfoSection()],
               ),
             ),
-
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10,bottom: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
               child: CustomButtonAuth(
                 textButton: 'Edit Profile',
                 onPressed: () {
                   Get.toNamed(AppRouter.editProfile);
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              child: CustomButtonAuth(
+                textButton: 'Logout',
+                onPressed: () {
+                  services.sharedPreferences.clear();
+                  Get.offAllNamed(AppRouter.login);
                 },
               ),
             ),

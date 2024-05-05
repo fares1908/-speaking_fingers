@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:speaking_fingers/features/favourite/logic/videoResponse.dart';
 import 'package:speaking_fingers/features/favourite/ui/widgets/custom_appBar_forvideoDetails.dart';
 import 'package:video_player/video_player.dart';
@@ -29,6 +31,8 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
     _initializeVideoPlayerFuture = _controller.initialize();
     _controller.setLooping(true);
     _controller.addListener(_onControllerUpdated);
+    _controller.position;
+    _controller.videoPlayerOptions;
   }
 
   @override
@@ -77,6 +81,7 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
         preferredSize: const Size.fromHeight(200.0),
         child: CustomAppBarVideoDetails(),
       ),
+
       // AppBar(
       //   title: Text(widget.video.title ?? 'Video Details'),
       // ),
