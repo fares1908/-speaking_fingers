@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:speaking_fingers/features/favourite/logic/videoResponse.dart';
-import 'package:speaking_fingers/features/favourite/ui/widgets/videoItem.dart';
+import 'package:speaking_fingers/features/home/ui/widgets/videoItem.dart';
 
 import '../VideoDetailsScreen.dart';
 
@@ -20,7 +20,7 @@ class VideoContainer extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 2,
-        mainAxisSpacing: 30,
+        mainAxisSpacing: .2,
       ),
       itemCount: videoList.length,
       itemBuilder: (context, index) {
@@ -33,7 +33,7 @@ class VideoContainer extends StatelessWidget {
               ),
             );
           },
-          child: VideoItem(video: video, isFavorited: isFavorited),
+          child: VideoItem(video: video),
         );
 
       },

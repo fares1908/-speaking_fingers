@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../../logic/favourite_controller.dart';
 
 class FavoriteVideoCard extends StatelessWidget {
   final String videoName;
@@ -12,6 +16,7 @@ class FavoriteVideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(FavoriteController());
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(

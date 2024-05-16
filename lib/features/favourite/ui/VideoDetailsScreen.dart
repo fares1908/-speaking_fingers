@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -152,10 +153,21 @@ class _VideoDetailsScreenState extends State<VideoDetailsScreen> {
                 ),
                 child: ListTile(
                   leading: video.thumbnail != null
-                      ? Image.network(
-                          video.thumbnail!,
-                          fit: BoxFit.fill,
-                        )
+                      ? CachedNetworkImage(
+                    imageUrl: video.thumbnail!,
+                    progressIndicatorBuilder: (context, url, downloadProgress) =>
+                        Container(
+                          width: 50, // Adjust the size as needed
+                          height: 50,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              value: downloadProgress.progress,
+                            ),
+                          ),
+                        ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    fit: BoxFit.fill,
+                  )
                       : Placeholder(),
                   // Display thumbnail if available, else display a placeholder
                   title: Text(video.title ?? 'No Title'),
