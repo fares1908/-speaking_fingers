@@ -1,4 +1,4 @@
-import 'dart:developer';
+/*import 'dart:developer';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
@@ -128,3 +128,4 @@ class ScanController extends GetxController {
     super.dispose();
   }
 }
+*/

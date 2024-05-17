@@ -1,13 +1,16 @@
+import 'package:flutter_vision/flutter_vision.dart';
 import 'package:get/get.dart';
 import 'package:camera/camera.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:typed_data';
 
 class CameraControllerX extends GetxController {
   CameraController? cameraController;
   var isCameraInitialized = false.obs;
   var responseText = ''.obs;
+  late List<Map<String, dynamic>> yoloResults;
+  CameraImage? cameraImage;
+  bool isLoaded = false;
+  bool isDetecting = false;
+  final FlutterVision vision = FlutterVision();
 
   @override
   void onInit() {
@@ -17,11 +20,19 @@ class CameraControllerX extends GetxController {
 
   Future<void> initializeCamera() async {
     final cameras = await availableCameras();
+
     if (cameras.isNotEmpty) {
       cameraController = CameraController(cameras[0], ResolutionPreset.medium);
       await cameraController!.initialize();
+       isLoaded = true;
+          isDetecting = false;
+          yoloResults = [];
+          await loadYoloModel();
       isCameraInitialized(true);
     }
+
+    
+
   }
 
   void closeCamera() {
@@ -29,32 +40,58 @@ class CameraControllerX extends GetxController {
     isCameraInitialized(false);
     update();  // Trigger UI update
   }
+  Future<void> loadYoloModel() async {
+    await vision.loadYoloModel(
+        labels: 'assets/labels.txt',
+        modelPath: 'assets/model.tflite',
+        modelVersion: "yolov8",
+        numThreads: 2,
+        useGpu: true);
+  
+      isLoaded = true;
+   
+  }
 
-  Future<void> captureAndSend() async {
-    if (cameraController != null && cameraController!.value.isInitialized) {
-      final image = await cameraController!.takePicture();
-      Uint8List imageData = await image.readAsBytes();
-      String base64Image = base64Encode(imageData);
-      await sendDataToServer(base64Image);
+
+  Future<void> yoloOnFrame(CameraImage cameraImage) async {
+    final result = await vision.yoloOnFrame(
+        bytesList: cameraImage.planes.map((plane) => plane.bytes).toList(),
+        imageHeight: cameraImage.height,
+        imageWidth: cameraImage.width,
+        );
+    if (result.isNotEmpty) {
+    
+        yoloResults = result;
+       
+      
     }
   }
 
-  Future<void> sendDataToServer(String base64Image) async {
-    try {
-      var response = await http.post(
-        Uri.parse('https://c0a7-41-232-32-20.ngrok-free.app/api/v1/Mediapipe/hand-tracking/'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'image': base64Image}),
-      );
-      responseText(response.body);
-      print(response.body);
-      update();  // Update to show response text
-    } catch (e) {
-      responseText('Error sending image: $e');
-      update();  // Update to show error
+  Future<void> startDetection() async {
+   
+      isDetecting = true;
+   
+    if (cameraController!.value.isStreamingImages) {
+      return;
     }
+    await cameraController!.startImageStream((image) async {
+      if (isDetecting) {
+        cameraImage = image;
+        yoloOnFrame(image);
+      }
+    });
   }
 
+  Future<void> stopDetection() async {
+   
+      isDetecting = false;
+      yoloResults.clear();
+   
+  }
+
+ 
+
+  
   @override
   void onClose() {
     cameraController?.dispose();
